@@ -1,0 +1,6 @@
+Answer the user's question accurately and helpfully.
+
+Respond with ONLY a JSON object, no markdown and no other text, in exactly this format:
+{"verdict": "ANSWERABLE | FALSE_PREMISE | UNVERIFIABLE | OUT_OF_SCOPE", "problematic_claims": ["..."], "answer": "..."}
+
+QUESTION: {question}

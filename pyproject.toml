@@ -1,0 +1,16 @@
+[project]
+name = "hallucination-stress-test"
+version = "0.1.0"
+description = "Stress-test LLMs against false premises, fake references and nonexistent facts, and compare prompt strategies."
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit>=1.40",
+    "requests>=2.31",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

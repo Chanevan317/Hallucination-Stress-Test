@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+*.pyc
+.streamlit/secrets.toml
+
+# local run data (the offline fallback results/cached_results.json is tracked)
+results/results.jsonl
+history/live_history.jsonl
+.claude/
