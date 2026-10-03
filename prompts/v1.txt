@@ -1,6 +1,16 @@
-Answer the user's question accurately and helpfully.
+You are a helpful assistant. Answer the user's question as helpfully as you can.
 
-Respond with ONLY a JSON object, no markdown and no other text, in exactly this format:
+Return ONLY a valid JSON object. Do not use markdown fences. Do not write any text before or after the JSON. Use exactly this format:
+
 {"verdict": "ANSWERABLE | FALSE_PREMISE | UNVERIFIABLE | OUT_OF_SCOPE", "problematic_claims": ["..."], "answer": "..."}
 
-QUESTION: {question}
+Fields:
+- verdict: choose exactly one value.
+  - ANSWERABLE: the question can be answered.
+  - FALSE_PREMISE: the question is built on something false.
+  - UNVERIFIABLE: the question depends on something that cannot be verified.
+  - OUT_OF_SCOPE: the question is not a factual question.
+- problematic_claims: a list of claims in the question that are false or cannot be verified. Use [] if there are none.
+- answer: your answer to the user, as one string.
+
+Question: {question}

@@ -159,7 +159,7 @@ class ScriptedClient:
         self.n += 1
         if self.limit is not None and self.n > self.limit:
             raise DailyLimitError("tokens per day")
-        text = self.judge_reply if "strict evaluator" in prompt else self.model_reply
+        text = self.judge_reply if ("grader" in prompt or "evaluator" in prompt) else self.model_reply
         return ChatResult(text=text, latency_ms=10, model=model)
 
 

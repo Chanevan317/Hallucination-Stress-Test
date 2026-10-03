@@ -30,7 +30,7 @@ uv run streamlit run app.py    # opens http://localhost:8501
 Then, in the app:
 
 1. **Settings**: paste your Groq API key and click **Test key & load models**. The three models below are preselected.
-2. **Experiment**: click **Start / Resume Batch Experiment Run**. The full run is 180 model calls plus 180 judge calls and takes roughly 20 minutes on the free tier. Watch the progress bar and live log; the results dashboard fills in below.
+2. **Experiment**: click **Start / Resume Batch Experiment Run**. The full run is 180 model calls plus 180 judge calls. It took about 21 minutes on the free tier (measured) and used about 533,000 tokens, which is nearly the whole daily token allowance of the judge model, so run it **once per day**. Watch the progress bar and live log; the results dashboard fills in below.
 3. When it finishes, click **Save these results as the offline demo fallback**.
 
 To run the tests (no API key needed): `uv run pytest`
@@ -95,7 +95,11 @@ dataset (20 traps + 10 controls)
 | Model B | `qwen/qwen3.8-27b` | Different family; fewest tokens and fastest (~570 tokens, ~370 ms per call). |
 | Judge | `openai/gpt-oss-120b` | A third, larger model so no model grades itself. On 18 sample records `qwen` as judge agreed with it 18/18. |
 
-Measured on a few dozen calls, so treat the numbers as rough. The free tier showed **1000 requests/day and 8000 tokens/minute per model**; a full run (~270k tokens) is limited by tokens per minute, not by the daily cap. Models can be changed in Settings.
+Measured on a few dozen calls, so treat these numbers as rough. The free tier showed **1000 requests/day and 8000 tokens/minute per model**, and the error message also revealed a **daily cap of 200,000 tokens per model**. The full run used about 533,000 tokens in total; the judge model used about 198,000 of its 200,000, so the judge can grade only about one more answer every 15 minutes afterwards. Keep `results/cached_results.json` as the demo fallback. Models can be changed in Settings.
+
+## Results of the full run
+
+Measured on 3 October 2026 (30 questions x 3 prompts x 2 models, one run each). Pooled over both models, the hallucination rate was **4/40 (10.0%) for V1, V2 and V3**, so the guardrail and verification prompts did not lower it. V2 and V3 removed invalid output (2/60 to 0/60). V3 caused over-refusal on `gpt-oss-20b` (5 of 10 normal questions refused). Most hallucinations were wrong corrections (11 of 12), not accepted false premises. Details, tables and limits: [`hetansh-shah/results.md`](hetansh-shah/results.md).
 
 ## Project layout
 
@@ -113,7 +117,7 @@ hitarthi-pansuriya/ Member 4: workflow, UI spec, documentation, demo script
 problem_17.md       The original problem statement
 ```
 
-> **Status:** the prompts in `prompts/` are working placeholders written so the app runs end to end. Final prompts from `om-bhatt/` replace them by copying each into the file of the same name; no code change is needed. Every prompt has an id derived from its text, so results from different prompt texts are never mixed.
+> **Prompts:** V1, V2, V3 and `judge.txt` are Om Bhatt's prompts (`om-bhatt/`), adapted only for the app's contract (the judge returns `invented_claim_span`, `identifies_key_claim` and `states_correction`). `judge_live.txt` is the judge used by Live Test. Every prompt has an id derived from its text, so results from different prompt texts are never mixed.
 
 ## Prompt history
 
