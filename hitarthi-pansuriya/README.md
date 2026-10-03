@@ -11,6 +11,4 @@ These files describe the **finished app**. If the app changes, update them.
 | `contributions.md` | Who did what, with commits and files to check |
 | `demo_script.md` | A timed 5-minute demo, likely judge questions, and the fallback plan |
 
-Remove the old files `1. End-to-End Workflows.md` and `Ui-spec.md` from this folder; the new files replace them.
-
 Run the app: `uv sync` then `uv run streamlit run app.py` (see the main README).

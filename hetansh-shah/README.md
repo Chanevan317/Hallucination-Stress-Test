@@ -13,4 +13,3 @@
 
 `dataset.json` and `unseen_set.json` are the same files the app loads from `data/`. If you change a question, change both copies and re-run the affected questions.
 
-Remove the old file `Research, problem analysis, testing.md` (the long planning document) from this folder; it described a different design and is replaced by the files above.
