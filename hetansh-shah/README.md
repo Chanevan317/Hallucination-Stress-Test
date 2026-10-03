@@ -1,15 +1,16 @@
 # Hetansh Shah (Member 3): Research, Problem Analysis, Testing
 
-Put your files in this folder. Commit often.
+| File | What it is |
+|---|---|
+| `problem_analysis.md` | The problem, users, requirements, hypothesis, definition of hallucination and research background |
+| `dataset.json` | The measured test set: 20 traps and 10 controls, with ground truth and `requires_correction` |
+| `unseen_set.json` | 8 held-out questions for the live demo (not part of the measured results) |
+| `experiment_protocol.md` | The model output format, metric formulas, settings and the free-tier run budget |
+| `judge_prompt.md` | What the judge labels mean and how special cases are counted |
+| `verification_checklist.md` | Facts a person must check by hand |
+| `results.md` | The measured results of the full run |
+| `CHANGES.md` | What changed in this revision |
 
-## What goes here
-- `problem_analysis.md`: the problem, target users, requirements, and how we define "hallucination".
-- `trap_questions.csv`: the labelled test set (20+ questions). Suggested columns: `id, question, trap_type, why_its_a_trap, correct_behaviour`.
-  - Trap types: false premise, fake reference, nonexistent fact.
-  - Include some real (non-trap) questions as controls to catch over-refusal.
-- `unseen_inputs.md`: extra questions kept aside for the live demo.
-- `results.md`: hallucination rate per prompt version and per model.
+`dataset.json` and `unseen_set.json` are the same files the app loads from `data/`. If you change a question, change both copies and re-run the affected questions.
 
-## Rules
-- Every question needs a clear, verifiable correct behaviour.
-- Do not share the `unseen_inputs.md` questions with the prompt writer.
+Remove the old file `Research, problem analysis, testing.md` (the long planning document) from this folder; it described a different design and is replaced by the files above.
